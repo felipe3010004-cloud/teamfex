@@ -373,7 +373,7 @@ export const UnifiedAiAssistantView: React.FC<UnifiedAiAssistantViewProps> = ({
             <Bot className="w-5 h-5 text-cyan-200 animate-pulse" />
             <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber-400 rounded-full" />
           </div>
-          <span>Asesora IA Híbrida</span>
+          <span>Asesora IA</span>
           <Volume2 className="w-4 h-4 text-cyan-200" />
         </button>
       </div>
@@ -625,7 +625,7 @@ export const UnifiedAiAssistantView: React.FC<UnifiedAiAssistantViewProps> = ({
                     "☕ Coffee Life (Cordyceps)",
                     "🦴 Colágeno Marino",
                     "🛡️ Inmune Plus",
-                    "🌿 Fibernat Detox",
+                    "🌿 Fibernat",
                     "🍫 Chocokids",
                     "💼 Combos Empresariales (87%)",
                     "👑 Membresía 250 Bs",
@@ -878,7 +878,7 @@ export const UnifiedAiAssistantView: React.FC<UnifiedAiAssistantViewProps> = ({
           </div>
           <div className="text-left">
             <div className="font-display font-black text-xs sm:text-sm text-[#082836] flex items-center gap-1.5">
-              <span>Asesora Inteligente Híbrida</span>
+              <span>Asesora Inteligente</span>
               <span className="px-1.5 py-0.2 rounded bg-cyan-50 text-cyan-800 border border-cyan-200 text-[10px] font-bold">
                 Con Voz
               </span>

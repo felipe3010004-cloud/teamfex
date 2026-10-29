@@ -198,8 +198,8 @@ export const Carousel3DView: React.FC<Carousel3DViewProps> = ({
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="mb-8 p-3 sm:p-4 rounded-3xl bg-white/95 backdrop-blur-md border border-[#c8e4ed] shadow-[0_8px_30px_rgba(8,145,178,0.06)] flex flex-wrap gap-3 items-center justify-between">
-        <div className="relative flex-1 min-w-[240px]">
+      <div className="mb-8 min-w-0 w-full p-3 sm:p-4 rounded-3xl bg-white/95 backdrop-blur-md border border-[#c8e4ed] shadow-[0_8px_30px_rgba(8,145,178,0.06)] flex flex-col sm:flex-row flex-wrap gap-3 items-stretch sm:items-center justify-between">
+        <div className="relative flex-1 min-w-0 w-full sm:min-w-[240px]">
           <Search className="w-4 h-4 text-[#0891b2] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
@@ -262,8 +262,8 @@ export const Carousel3DView: React.FC<Carousel3DViewProps> = ({
           {/* Nav buttons */}
           <button
             type="button"
-            onClick={handlePrev}
-            className="absolute left-1 md:left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white hover:bg-cyan-600 text-[#0891b2] hover:text-white border border-[#bce2ee] hover:border-cyan-600 flex items-center justify-center transition-all hover:scale-110 active:scale-95 shadow-xl shadow-cyan-950/10 cursor-pointer"
+            onClick={handlePrev}            
+            className="absolute left-1 md:left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white hover:bg-cyan-600 text-[#0891b2] hover:text-white border border-[#bce2ee] hover:border-cyan-600 flex items-center justify-center transition-all hover:scale-110 active:scale-95 shadow-xl shadow-cyan-950/10 cursor-pointer"
             aria-label="Producto anterior"
           >
             <ChevronLeft className="w-6 h-6" />
@@ -272,14 +272,15 @@ export const Carousel3DView: React.FC<Carousel3DViewProps> = ({
           <button
             type="button"
             onClick={handleNext}
-            className="absolute right-1 md:right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white hover:bg-cyan-600 text-[#0891b2] hover:text-white border border-[#bce2ee] hover:border-cyan-600 flex items-center justify-center transition-all hover:scale-110 active:scale-95 shadow-xl shadow-cyan-950/10 cursor-pointer"
+            className="absolute right-1 md:right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white hover:bg-cyan-600 text-[#0891b2] hover:text-white border border-[#bce2ee] hover:border-cyan-600 flex items-center justify-center transition-all hover:scale-110 active:scale-95 shadow-xl shadow-cyan-950/10 cursor-pointer"
             aria-label="Producto siguiente"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
 
           {/* 3D Track */}
-          <div className="relative w-full h-[520px] sm:h-[555px] flex items-center justify-center perspective-1200 overflow-visible select-none">
+          
+            <div className="relative w-full min-w-0 h-[520px] sm:h-[555px] flex items-center justify-center perspective-1200 overflow-visible select-none">
             <div className="absolute bottom-6 w-[560px] h-[80px] bg-gradient-to-r from-transparent via-[#0891b2]/10 to-transparent rounded-full blur-xl pointer-events-none" />
 
             <div className="relative w-full h-full flex items-center justify-center preserve-3d">
@@ -295,10 +296,11 @@ export const Carousel3DView: React.FC<Carousel3DViewProps> = ({
 
                 if (absOffset > 2) return null;
 
-                const xOffset = offset * (isMobile ? 210 : 310);
-                const zOffset = -absOffset * (isMobile ? 180 : 220);
+                const xOffset = offset * (isMobile ? 125 : 310);
+                const zOffset = -absOffset * (isMobile ? 150 : 220);
                 const rotY = offset * -28;
                 const scale = Math.max(0.72, 1 - absOffset * 0.12);
+
                 const opacity = isActive ? 1 : Math.max(0.35, 1 - absOffset * 0.35);
                 const zIndex = isActive ? 50 : 20 - absOffset * 5;
 
@@ -315,7 +317,7 @@ export const Carousel3DView: React.FC<Carousel3DViewProps> = ({
                       opacity,
                       zIndex,
                     }}
-                    className={`absolute w-[285px] sm:w-[335px] h-[465px] sm:h-[495px] transition-all duration-700 ease-out select-none ${
+                      className={`absolute w-[min(78vw,285px)] sm:w-[335px] h-[465px] sm:h-[495px] transition-all duration-700 ease-out select-none ${
                       isActive
                         ? "z-50 pointer-events-auto"
                         : "z-20 pointer-events-auto cursor-pointer"

@@ -33,7 +33,7 @@ export const HeroView: React.FC<HeroViewProps> = ({
             <h1 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl text-[#082836] tracking-tight leading-[1.12]">
               Tu bienestar, tu crecimiento,{" "}
               <span className="bg-gradient-to-r from-[#0284c7] via-[#0891b2] to-[#0d9488] bg-clip-text text-transparent underline decoration-[#06b6d4]/50 decoration-4">
-                tu mejor versión 3D
+                tu mejor versión
               </span>
             </h1>
 

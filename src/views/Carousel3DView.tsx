@@ -151,13 +151,13 @@ export const Carousel3DView: React.FC<Carousel3DViewProps> = ({
       <div className="text-center max-w-3xl mx-auto mb-8">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#bce2ee] text-[#0891b2] text-xs font-bold uppercase tracking-wider mb-3 shadow-xs">
           <Sparkles className="w-3.5 h-3.5 text-cyan-500" />
-          <span>Vitrina 3D Interactiva · Profundidad y Sombras Dinámicas</span>
+          <span>Vitrina Interactiva · Profundidad y Sombras Dinámicas</span>
         </div>
         <h2 className="font-display font-black text-3xl sm:text-4xl text-[#082836] tracking-tight">
           Catálogo Oficial de 5 Formulaciones Bioactivas
         </h2>
         <p className="text-[#325261] text-sm sm:text-base mt-2">
-          Pasa el cursor o desliza para experimentar la rotación y profundidad 3D con reflejos dinámicos en tonos azul y verde cian.
+          Pasa el cursor o desliza para experimentar la rotación y profundidad con reflejos dinámicos en tonos azul y verde cian.
         </p>
 
         {/* 3D Motion Status */}

@@ -68,7 +68,7 @@ export const HeaderView: React.FC<HeaderViewProps> = ({
               onClick={() => scrollTo("catalogo-3d")}
               className="hover:text-[#0891b2] transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
-              Catálogo 3D
+              Catálogo
             </button>
             <button
               onClick={() => scrollTo("membresia-vip")}
@@ -172,7 +172,7 @@ export const HeaderView: React.FC<HeaderViewProps> = ({
             onClick={() => scrollTo("catalogo-3d")}
             className="text-left py-3 px-4 rounded-xl bg-white border border-[#c8e4ed] text-[#082836] font-semibold text-base transition-colors"
           >
-            Catálogo 3D de Productos
+            Catálogo de Productos
           </button>
           <button
             onClick={() => scrollTo("membresia-vip")}
@@ -185,7 +185,7 @@ export const HeaderView: React.FC<HeaderViewProps> = ({
             onClick={() => scrollTo("combos-exclusivos")}
             className="text-left py-3 px-4 rounded-xl bg-white border border-[#c8e4ed] text-[#082836] font-semibold text-base transition-colors"
           >
-            Combos en 3D
+            Combos
           </button>
           <button
             onClick={() => scrollTo("videos-oficiales")}

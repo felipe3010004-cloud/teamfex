@@ -38,7 +38,7 @@ export const HeroView: React.FC<HeroViewProps> = ({
             </h1>
 
             <p className="text-[#325261] text-base sm:text-lg max-w-2xl font-normal leading-relaxed">
-              Descubre las <strong>5 formulaciones bioactivas</strong> de alta biodisponibilidad y los <strong>3 combos empresariales</strong> de Equipo Vida S.R.L. Con café arábica enriquecido con <strong>Cordyceps Sinensis y Ganoderma</strong>, colágeno hidrolizado y detox intestinal para transformar tu salud en los 9 departamentos de Bolivia.
+              Descubre las <strong>5 formulaciones bioactivas</strong> de alta biodisponibilidad y los <strong>3 combos empresariales</strong> de Equipo Vida S.R.L. Con café órganico enriquecido con <strong>Cordyceps Sinensis y Ganoderma</strong>, colágeno hidrolizado y detox intestinal para transformar tu salud en los 9 departamentos de Bolivia.
             </p>
 
             <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
@@ -62,7 +62,7 @@ export const HeroView: React.FC<HeroViewProps> = ({
                 onClick={onExploreProducts}
                 className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-600 via-teal-600 to-sky-700 hover:from-cyan-500 hover:to-teal-500 text-white font-display font-bold text-sm sm:text-base tracking-wide flex items-center gap-2.5 shadow-xl shadow-cyan-950/20 transition-all hover:scale-105 active:scale-95 cursor-pointer border border-cyan-400/40"
               >
-                <span>Explorar catálogo 3D</span>
+                <span>Explorar catálogo </span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 

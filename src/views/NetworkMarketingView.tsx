@@ -513,7 +513,7 @@ export const NetworkMarketingView: React.FC<NetworkMarketingViewProps> = ({
                   <span>Enlace Web Personalizado (?ref=tu_codigo)</span>
                 </div>
                 <p className="text-slate-600 pl-7">
-                  Se te asigna tu propio enlace de catálogo virtual con asistente 3D e IA para que recibas clientes de La Paz, Santa Cruz, Cochabamba y toda Bolivia directo en tu WhatsApp.
+                  Se te asigna tu propio enlace de catálogo virtual con asistente IA para que recibas clientes de La Paz, Santa Cruz, Cochabamba y toda Bolivia directo en tu WhatsApp.
                 </p>
               </div>
             </div>

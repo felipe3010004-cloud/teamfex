@@ -1,76 +1,138 @@
 
-import { generateGroundedChatResponse } from "../../server/aiService";
+import type { Handler } from "@netlify/functions";
 
-export const handler = async (event: any) => {
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Content-Type": "application/json",
-  };
-
-  if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 204,
-      headers,
-      body: "",
-    };
-  }
-
-  if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      headers,
-      body: JSON.stringify({
-        error: "Método no permitido",
-      }),
-    };
-  }
-
+export const handler: Handler = async (event) => {
   try {
-    const { prompt, history } = JSON.parse(event.body || "{}");
-
-    if (!prompt || typeof prompt !== "string") {
+    if (event.httpMethod !== "POST") {
       return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({
-          error: "Falta la pregunta del usuario.",
-        }),
+        statusCode: 405,
+        body: JSON.stringify({ error: "Metodo no permitido" })
       };
     }
 
-    const result = await generateGroundedChatResponse(
-      prompt,
-      history || []
-    );
+    const apiKey = process.env.GEMINI_API_KEY;
+
+    if (!apiKey) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: "Falta GEMINI_API_KEY" })
+      };
+    }
+
+    const body = JSON.parse(event.body || "{}");
+
+    const message = typeof body.message === "string"
+      ? body.message.trim()
+      : "";
+
+    const audio = typeof body.audio === "string"
+      ? body.audio
+      : "";
+
+    if (!message && !audio) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({
+          error: "Debes enviar un mensaje o un audio"
+        })
+      };
+    }
+
+    const parts: any[] = [];
+
+    if (audio) {
+      parts.push({
+        inline_data: {
+          mime_type: body.mimeType || "audio/wav",
+          data: audio
+        }
+      });
+
+      parts.push({
+        text:
+          "Escucha el audio del usuario, comprende lo que dice " +
+          "en español y responde directamente a su consulta. " +
+          "No te limites a transcribirlo. " +
+          "Actúa como la asesora virtual de TEAM LIFE | Equipo Vida S.R.L. " +
+          "Responde de manera clara, cordial y natural. " +
+          "Si no comprendes el audio, solicita que repita la pregunta."
+      });
+    } else {
+      parts.push({
+        text:
+          "Actúa como la asesora virtual de TEAM LIFE | Equipo Vida S.R.L. " +
+          "Responde de manera clara, cordial y natural. " +
+          "Consulta del usuario: " + message
+      });
+    }
+
+    const url =
+      "https://generativelanguage.googleapis.com/v1beta/models/" +
+      "gemini-2.5-flash:generateContent?key=" + apiKey;
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        contents: [
+          {
+            role: "user",
+            parts
+          }
+        ],
+        generationConfig: {
+          temperature: 0.4
+        }
+      })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      console.error("Error de Gemini:", result);
+
+      return {
+        statusCode: 502,
+        body: JSON.stringify({
+          error: "Gemini no pudo procesar la solicitud",
+          detail: result
+        })
+      };
+    }
 
     const reply =
-      typeof result === "string"
-        ? result
-        : result?.reply || "";
+      result.candidates?.[0]?.content?.parts
+        ?.map((part: any) => part.text || "")
+        .join("")
+        .trim() || "";
 
     if (!reply) {
-      throw new Error("Gemini no devolvió una respuesta.");
+      return {
+        statusCode: 502,
+        body: JSON.stringify({
+          error: "Gemini no genero una respuesta"
+        })
+      };
     }
 
     return {
       statusCode: 200,
-      headers,
-      body: JSON.stringify({
-        reply: reply,
-      }),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ reply })
     };
 
-  } catch (error: any) {
-    console.error("Error en TEAM LIFE:", error);
+  } catch (error) {
+    console.error("Error en chat:", error);
 
     return {
       statusCode: 500,
-      headers,
       body: JSON.stringify({
-        error: "Error al procesar la consulta.",
-      }),
+        error: "Error interno del servidor"
+      })
     };
   }
 };
